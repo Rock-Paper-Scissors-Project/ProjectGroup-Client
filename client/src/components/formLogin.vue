@@ -20,18 +20,18 @@ export default {
   methods: {
     addmember () {
       const user = this.username
+      localStorage.clear()
+      localStorage.setItem('name', user)
       console.log('user dikirim ke server', user)
       var socket = io.connect('http://localhost:3000')
       socket.emit('add user', { user })
-      // socket.on('add user', function (user) {
-      //   console.log('add member')
-      // })
     }
   },
   created () {
     console.log('Created')
     io.connect('http://localhost:3000').on('get user', (data) => {
-      console.log('user dari server', data)
+      this.$store.commit('SET_USER', data)
+      console.log('user dari server dan di store ke state', this.$store.state.users)
     })
   }
 }

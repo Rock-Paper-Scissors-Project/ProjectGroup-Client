@@ -2,18 +2,33 @@
   <div>
     <div class="onlineUser-box">
         <h3>Online Users</h3>
-        <div class="onlineUser-card">
-            <p>One Random Mock User 1</p>
-            <p>One Random Mock User 2</p>
-            <p>One Random Mock User 3</p>
+        <div class="onlineUser-card" >
+            <!-- <p>{{listuser}}</p> -->
+            <p>{{this.$store.state.users[0].user}}</p>
+            <p>{{this.$store.state.users[2].user}}</p>
+            <!-- <p>One Random Mock User 3</p> -->
         </div>
     </div>
   </div>
 </template>
 
 <script>
+import io from 'socket.io-client'
 export default {
-  name: 'onlineUserList'
+  name: 'onlineUserList',
+  data () {
+    return {
+      listuser: ''
+    }
+  },
+  created () {
+    io.connect('http://localhost:3000').on('get user', (data) => {
+      this.$store.commit('SET_USER', data)
+      console.log('user dari server dan di store ke state', this.$store.state.users)
+    })
+    console.log(this.$store.state.users)
+    this.listuser = this.$store.state.users
+  }
 }
 </script>
 
