@@ -30,9 +30,8 @@ export default {
   },
   created () {
     // console.log('Created')
-    // io.connect('http://localhost:3000').on('get user', (data) => {
-    //   this.$store.commit('SET_USER', data)
-    //   console.log('user dari server dan di store ke state', this.$store.state.users)
+    // io.connect('http://localhost:3000').on('full', () => {
+    //   console.log('Fullll')
     // })
   }
 }

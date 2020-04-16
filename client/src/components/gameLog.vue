@@ -26,7 +26,7 @@ export default {
   },
   methods: {
     logout () {
-      const socket = io.connect('http://localhost:3000')
+      var socket = io.connect('http://localhost:3000')
       socket.emit('logout', localStorage.name)
       localStorage.clear()
       this.$router.push('/')
