@@ -28,7 +28,7 @@
                         </label>
                     </div>
             </div>
-            <button type="submit" class="btn btn-primary" @click.prevent="setChoice" style="background-color:#2ecc71; color:white; border-width: 0px; padding: 10px 25px;">Submit!</button>
+            <button type="submit" class="submit-button" @click.prevent="setChoice">Submit!</button>
         </form>
     </div>
   </div>
@@ -101,6 +101,15 @@ img{
 input[type=radio]:checked + label>img {
     border: 1px solid #fff;
     box-shadow: 0 0 3px 3px #2ecc71;
+}
+
+.submit-button{
+    background-color:#2ecc71;
+    color:white;
+    border-width: 0px;
+    padding: 10px 25px;
+    margin: 10px;
+    border-radius: 4px;
 }
 
 </style>
