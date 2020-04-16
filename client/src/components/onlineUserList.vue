@@ -4,8 +4,7 @@
         <h3>Online Users</h3>
         <div class="onlineUser-card" >
             <!-- <p>{{listuser}}</p> -->
-            <p>{{this.$store.state.users[0].user}}</p>
-            <p>{{this.$store.state.users[2].user}}</p>
+            <p v-for="(user,idx) in this.$store.state.users" :key="idx">{{user}}</p>
             <!-- <p>One Random Mock User 3</p> -->
         </div>
     </div>
@@ -22,9 +21,14 @@ export default {
     }
   },
   created () {
+    // io.connect('http://localhost:3000').on('disconnected', (user) => {
+    //   console.log('user disconect dari server dan di store ke state', user)
+    // })
+  },
+  mounted () {
     io.connect('http://localhost:3000').on('get user', (data) => {
       this.$store.commit('SET_USER', data)
-      console.log('user dari server dan di store ke state', this.$store.state.users)
+      // console.log('user dari server dan di store ke state', this.$store.state.users)
     })
     console.log(this.$store.state.users)
     this.listuser = this.$store.state.users

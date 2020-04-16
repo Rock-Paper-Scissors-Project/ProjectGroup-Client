@@ -10,7 +10,7 @@
 </template>
 
 <script>
-import io from '../src/components/socket'
+// import io from '../src/components/socket'
 export default {
   name: 'App',
   data () {
@@ -18,15 +18,28 @@ export default {
     }
   },
   computed: {
-    isConnected () {
-      return this.$store.state.isConnected
-    }
+    // isConnected () {
+    //   return this.$store.state.isConnected
+    // }
   },
   created () {
-    io.on('connection', (data) => {
-      console.log('CONNECTED')
-      this.$store.commit('SET_CONNECT', true)
-    })
+    this.$toasted.register('my_app_error',
+      (payload) => {
+        return payload.message
+      }, { duration: 1500, theme: 'bubble', type: 'error' }
+    )
+
+    this.$toasted.register('my_app_success',
+      (payload) => {
+        return payload.message
+      }, { duration: 1500, theme: 'bubble', type: 'success' }
+    )
+
+    this.$toasted.register('my_app_info',
+      (payload) => {
+        return payload.message
+      }, { duration: 1500, theme: 'bubble', type: 'info' }
+    )
   }
 }
 </script>

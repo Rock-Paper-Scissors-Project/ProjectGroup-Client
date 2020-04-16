@@ -2,11 +2,11 @@
   <div class="game-log-box">
     <div class="game-log-box-header">
       <h3>Game Log</h3>
-      <button class="submit-button" @click="logout" style="background-color:#e74c3c; color:white; border-width: 0px; padding: 10px 25px; margin: 10px; border-radius: 4px;">Exit session</button>
+      <button class="submit-button" @click.prevent="logout" style="background-color:#e74c3c; color:white; border-width: 0px; padding: 10px 25px; margin: 10px; border-radius: 4px;">Exit session</button>
     </div>
     <div class="game-log-message-box">
       <p>{{winner}}</p>
-      <p>Waiting for player...</p>
+      <p>{{msg}}</p>
       <p>Player user_2 has joined the game
       <p>Make your choice!</p>
     </div>
@@ -20,27 +20,41 @@ export default {
   data () {
     return {
       choose: '',
-      winner: ''
+      winner: '',
+      msg: ''
     }
   },
   methods: {
     logout () {
+      var socket = io.connect('http://localhost:3000')
+      socket.emit('logout', localStorage.name)
       localStorage.clear()
       this.$router.push('/')
     }
   },
   created () {
+    // io.on('connected', function (username) {
+    //   this.msg = 'User ' + username + '  has joined'
+    // })
+  },
+  mounted () {
     io.connect('http://localhost:3000').on('player 1 win', (data) => {
       this.winner = data[0].user + ' ' + data[0].choice + ', ' + data[1].user + ' ' + data[1].choice + ' => ' + data[0].user + ' wins!'
-      console.log('1 WIN')
+      this.$toasted.global.my_app_success({
+        message: data[0].user + ' wins! '
+      })
     })
     io.connect('http://localhost:3000').on('player 2 win', (data) => {
       this.winner = data[0].user + ' ' + data[0].choice + ', ' + data[1].user + ' ' + data[1].choice + ' => ' + data[1].user + ' wins!'
-      console.log('2 WIN')
+      this.$toasted.global.my_app_success({
+        message: data[1].user + ' wins! '
+      })
     })
     io.connect('http://localhost:3000').on('tie', (data) => {
       this.winner = data[0].user + ' ' + data[0].choice + ', ' + data[1].user + ' ' + data[1].choice + ' => ' + ' Result is tie'
-      console.log('TIEEEE')
+      this.$toasted.global.my_app_info({
+        message: ' Result is tie'
+      })
     })
   }
 }
