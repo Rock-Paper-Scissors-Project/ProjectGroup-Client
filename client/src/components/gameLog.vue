@@ -36,18 +36,25 @@ export default {
     // io.on('connected', function (username) {
     //   this.msg = 'User ' + username + '  has joined'
     // })
+  },
+  mounted () {
     io.connect('http://localhost:3000').on('player 1 win', (data) => {
       this.winner = data[0].user + ' ' + data[0].choice + ', ' + data[1].user + ' ' + data[1].choice + ' => ' + data[0].user + ' wins!'
-      console.log('1 WIN')
+      this.$toasted.global.my_app_success({
+        message: data[0].user + ' wins! '
+      })
     })
     io.connect('http://localhost:3000').on('player 2 win', (data) => {
       this.winner = data[0].user + ' ' + data[0].choice + ', ' + data[1].user + ' ' + data[1].choice + ' => ' + data[1].user + ' wins!'
-      console.log('2 WIN')
+      this.$toasted.global.my_app_success({
+        message: data[1].user + ' wins! '
+      })
     })
     io.connect('http://localhost:3000').on('tie', (data) => {
-      console.log('8888888888888')
-      console.log(data)
       this.winner = data[0].user + ' ' + data[0].choice + ', ' + data[1].user + ' ' + data[1].choice + ' => ' + ' Result is tie'
+      this.$toasted.global.my_app_info({
+        message: ' Result is tie'
+      })
     })
   }
 }
