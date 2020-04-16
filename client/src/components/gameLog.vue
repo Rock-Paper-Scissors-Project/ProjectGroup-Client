@@ -1,6 +1,9 @@
 <template>
   <div class="game-log-box">
-    <h3>Game Log</h3>
+    <div class="game-log-box-header">
+      <h3>Game Log</h3>
+      <button class="submit-button" @click="logout" style="background-color:#e74c3c; color:white; border-width: 0px; padding: 10px 25px; margin: 10px; border-radius: 4px;">Exit session</button>
+    </div>
     <div class="game-log-message-box">
       <p>{{winner}}</p>
       <p>Waiting for player...</p>
@@ -21,19 +24,22 @@ export default {
     }
   },
   methods: {
-
+    logout () {
+      localStorage.clear()
+      this.$router.push('/')
+    }
   },
   created () {
     io.connect('http://localhost:3000').on('player 1 win', (data) => {
-      this.winner = data[0].user + ' ' + data[0].choice + ',' + data[1].user + ', ' + data[1].choice + data[0].user +' wins!'
+      this.winner = data[0].user + ' ' + data[0].choice + ', ' + data[1].user + ' ' + data[1].choice + ' => ' + data[0].user + ' wins!'
       console.log('1 WIN')
     })
     io.connect('http://localhost:3000').on('player 2 win', (data) => {
-      this.winner = data[0].user + ' ' + data[0].choice + ',' + data[1].user + ' ' + data[1].choice + data[1].user +' wins!'
+      this.winner = data[0].user + ' ' + data[0].choice + ', ' + data[1].user + ' ' + data[1].choice + ' => ' + data[1].user + ' wins!'
       console.log('2 WIN')
     })
     io.connect('http://localhost:3000').on('tie', (data) => {
-      this.winner = data[0].user + ' ' + data[0].choice + ',' + data[1].user + ' ' + data[1].choice + ' Result is tie'
+      this.winner = data[0].user + ' ' + data[0].choice + ', ' + data[1].user + ' ' + data[1].choice + ' => ' + ' Result is tie'
       console.log('TIEEEE')
     })
   }
@@ -44,8 +50,9 @@ export default {
 
 .game-log-message-box{
   background-color: width;
-  width: 70%;
-  margin: 0 15%;
+  width: 80%;
+  margin: 0 20% 0 0;
+  text-align: left;
 
 }
 
@@ -55,6 +62,12 @@ export default {
   border-style: solid;
   border-color: #2ecc71;
   background-color:#ecf0f1;
+  padding: 5px 20px;
+}
+
+.game-log-box-header{
+  display:flex;
+  justify-content: space-between;
 }
 
 </style>
