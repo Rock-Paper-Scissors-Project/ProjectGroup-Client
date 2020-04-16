@@ -10,7 +10,7 @@
 </template>
 
 <script>
-import io from './src/components/socket'
+// import io from '../src/components/socket'
 </script>
 
 <style>
