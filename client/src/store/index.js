@@ -6,8 +6,7 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     users: '',
-    playerChoise: '',
-    isConnected: false
+    playerChoise: ''
   },
   mutations: {
     SET_USER (state, data) {
