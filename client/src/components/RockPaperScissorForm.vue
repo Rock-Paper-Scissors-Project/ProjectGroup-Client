@@ -4,27 +4,28 @@
       <h3>Choose a hand to play!</h3>
         <form>
             <div class="hand-selection-form">
-                    <div id="hand-selection-rock">
-                        <input type="radio" name="hand-selection" id="rock" value="rock">
-                        <label for="rock">
-                            <h2>ROCK</h2>
-                            <!-- <img src="" alt="hand-rock"> -->
-                        </label>
-                    </div>
                     <div id="hand-selection-paper">
-                       <input type="radio" name="hand-selection" id="paper" value="paper">
+                       <input type="radio" name="hand-selection" class="input-hidden" id="paper" value="paper">
                         <label for="paper">
-                            <h2>PAPER</h2>
-                            <!-- <img src="" alt="hand-paper"> -->
+                            <!-- <h2>PAPER</h2> -->
+                            <img src="@/assets/images/rps-1-paper.png" alt="hand-paper">
                         </label>
                     </div>
 
                     <div id="hand-selection-scissor">
-                        <input type="radio" name="hand-selection" id="scissor" value="scissor">
+                        <input type="radio" name="hand-selection" class="input-hidden" id="scissor" value="scissor">
                     <label for="scissor">
-                        <h2>SCISSOR</h2>
-                        <!-- <img src="" alt="hand-scissor"> -->
+                        <!-- <h2>SCISSOR</h2> -->
+                        <img src="@/assets/images/rps-3-scissor.png" alt="hand-scissor">
                     </label>
+                    </div>
+
+                    <div id="hand-selection-rock">
+                        <input type="radio" name="hand-selection" class="input-hidden" id="rock" value="rock">
+                        <label for="rock">
+                            <!-- <h2>ROCK</h2> -->
+                            <img src="@/assets/images/rps-2-rock.png" alt="hand-rock">
+                        </label>
                     </div>
             </div>
             <button type="submit" class="btn btn-primary" style="background-color:#2ecc71; color:white; border-width: 0px; padding: 10px 25px;">Submit!</button>
@@ -47,6 +48,11 @@ export default {
   border-color: #2ecc71;
   background-color:#ecf0f1;
   justify-content: center;
+}
+
+img{
+    max-width: 100%;
+    border-radius: 50%;
 }
 
 .hand-selection-form{
@@ -74,6 +80,15 @@ export default {
     flex-direction: column;
     align-items: center;
     margin:10px
+}
+
+.input-hidden{
+  display: none
+}
+
+input[type=radio]:checked + label>img {
+    border: 1px solid #fff;
+    box-shadow: 0 0 3px 3px #2ecc71;
 }
 
 </style>
