@@ -5,7 +5,7 @@
         <form>
             <div class="hand-selection-form">
                     <div id="hand-selection-paper">
-                       <input type="radio" name="hand-selection" class="input-hidden" id="paper" value="paper">
+                       <input type="radio" v-model="choose" name="hand-selection" class="input-hidden" id="paper" value="paper">
                         <label for="paper">
                             <!-- <h2>PAPER</h2> -->
                             <img src="@/assets/images/rps-1-paper.png" alt="hand-paper">
@@ -13,7 +13,7 @@
                     </div>
 
                     <div id="hand-selection-scissor">
-                        <input type="radio" name="hand-selection" class="input-hidden" id="scissor" value="scissor">
+                        <input type="radio" v-model="choose" name="hand-selection" class="input-hidden" id="scissor" value="scissor">
                     <label for="scissor">
                         <!-- <h2>SCISSOR</h2> -->
                         <img src="@/assets/images/rps-3-scissor.png" alt="hand-scissor">
@@ -21,22 +21,34 @@
                     </div>
 
                     <div id="hand-selection-rock">
-                        <input type="radio" name="hand-selection" class="input-hidden" id="rock" value="rock">
+                        <input type="radio" v-model="choose" name="hand-selection" class="input-hidden" id="rock" value="rock">
                         <label for="rock">
                             <!-- <h2>ROCK</h2> -->
                             <img src="@/assets/images/rps-2-rock.png" alt="hand-rock">
                         </label>
                     </div>
             </div>
-            <button type="submit" class="submit-button">Submit!</button>
+            <button type="submit" class="submit-button" @click.prevent="setChoice">Submit!</button>
         </form>
     </div>
   </div>
 </template>
 
 <script>
+import io from 'socket.io-client'
 export default {
-  name: 'rockPaperScissorForm'
+  name: 'rockPaperScissorForm',
+  data () {
+    return {
+      choose: ''
+    }
+  },
+  methods: {
+    setChoice () {
+      var socket = io.connect('http://localhost:3000')
+      socket.emit('player choice', localStorage.name, this.choose)
+    }
+  }
 }
 </script>
 
