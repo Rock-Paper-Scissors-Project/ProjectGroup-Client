@@ -23,10 +23,23 @@ export default {
     // }
   },
   created () {
-    // io.on('connection', (data) => {
-    //   console.log('CONNECTED')
-    //   this.$store.commit('SET_CONNECT', true)
-    // })
+    this.$toasted.register('my_app_error',
+      (payload) => {
+        return payload.message
+      }, { duration: 1500, theme: 'bubble', type: 'error' }
+    )
+
+    this.$toasted.register('my_app_success',
+      (payload) => {
+        return payload.message
+      }, { duration: 1500, theme: 'bubble', type: 'success' }
+    )
+
+    this.$toasted.register('my_app_info',
+      (payload) => {
+        return payload.message
+      }, { duration: 1500, theme: 'bubble', type: 'info' }
+    )
   }
 }
 </script>

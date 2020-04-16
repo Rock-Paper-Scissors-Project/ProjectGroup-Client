@@ -23,17 +23,21 @@ export default {
       localStorage.clear()
       localStorage.setItem('name', user)
       console.log('user dikirim ke server', user)
-      var socket = io.connect('http://localhost:3000')
+      const socket = io.connect('http://localhost:3000')
       socket.emit('add user', user)
-      this.$router.push('/dashboard')
+      console.log(this.$store.state.users.length)
+      if (this.$store.state.users.length < 2) {
+        this.$router.push('/dashboard')
+      } else {
+        const socket = io.connect('http://localhost:3000')
+        socket.emit('logout', localStorage.name)
+        localStorage.clear()
+        this.$router.push('/')
+        this.$toasted.global.my_app_error({
+          message: 'Room Full Please Wait'
+        })
+      }
     }
-  },
-  created () {
-    // console.log('Created')
-    // io.connect('http://localhost:3000').on('get user', (data) => {
-    //   this.$store.commit('SET_USER', data)
-    //   console.log('user dari server dan di store ke state', this.$store.state.users)
-    // })
   }
 }
 
