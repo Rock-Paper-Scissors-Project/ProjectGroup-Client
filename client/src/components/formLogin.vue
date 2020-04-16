@@ -25,6 +25,7 @@ export default {
       console.log('user dikirim ke server', user)
       var socket = io.connect('http://localhost:3000')
       socket.emit('add user', { user })
+      this.$router.push('/dashboard')
     }
   },
   created () {

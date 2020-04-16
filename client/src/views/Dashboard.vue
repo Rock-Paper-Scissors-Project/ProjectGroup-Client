@@ -27,6 +27,11 @@ export default {
     rockPaperScissorForm,
     gameLog,
     chatBox
+  },
+  created () {
+    if (!localStorage.name) {
+      this.$router.push('/')
+    }
   }
 }
 </script>
