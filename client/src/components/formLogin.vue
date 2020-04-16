@@ -24,16 +24,16 @@ export default {
       localStorage.setItem('name', user)
       console.log('user dikirim ke server', user)
       var socket = io.connect('http://localhost:3000')
-      socket.emit('add user', { user })
+      socket.emit('add user', user)
       this.$router.push('/dashboard')
     }
   },
   created () {
-    console.log('Created')
-    io.connect('http://localhost:3000').on('get user', (data) => {
-      this.$store.commit('SET_USER', data)
-      console.log('user dari server dan di store ke state', this.$store.state.users)
-    })
+    // console.log('Created')
+    // io.connect('http://localhost:3000').on('get user', (data) => {
+    //   this.$store.commit('SET_USER', data)
+    //   console.log('user dari server dan di store ke state', this.$store.state.users)
+    // })
   }
 }
 

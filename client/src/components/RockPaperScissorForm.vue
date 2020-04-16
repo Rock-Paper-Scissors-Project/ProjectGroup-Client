@@ -28,7 +28,7 @@
                         </label>
                     </div>
             </div>
-            <button type="submit" class="submit-button" @click.prevent="setChoice">Submit!</button>
+            <button type="submit" class="submit-button" @click.prevent="setChoice()">Submit!</button>
         </form>
     </div>
   </div>
