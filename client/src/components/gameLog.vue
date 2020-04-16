@@ -1,7 +1,7 @@
 <template>
   <div class="game-log-box">
     <h3>Game Log</h3>
-    <div>
+    <div class="game-log-message-box">
       <p>Player user_1 won!</p>
       <p>Waiting for player...</p>
       <p>Player user_2 has joined the game
@@ -17,6 +17,14 @@ export default {
 </script>
 
 <style>
+
+.game-log-message-box{
+  background-color: width;
+  width: 70%;
+  margin: 0 15%;
+
+}
+
 .game-log-box{
   height: 100%;
   border:1px;

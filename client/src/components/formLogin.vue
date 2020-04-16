@@ -1,7 +1,7 @@
 <template>
   <div>
     <form>
-        <p><b>Username:</b></p>
+        <h3><b>Username:</b></h3>
         <input type="text" placeholder="Your user name here" v-model="username">
         <input type="submit" value="Log in" @click.prevent="addmember()">
     </form>
