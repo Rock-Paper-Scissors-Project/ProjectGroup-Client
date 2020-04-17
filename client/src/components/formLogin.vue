@@ -2,7 +2,7 @@
   <div>
     <form>
         <h3><b>Username:</b></h3>
-        <input type="text" placeholder="Your user name here" v-model="username">
+        <input type="text" placeholder="Your user name here" v-model="username" autofocus>
         <input type="submit" value="Log in" @click.prevent="addmember()">
     </form>
   </div>
