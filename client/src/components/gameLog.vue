@@ -35,14 +35,14 @@ export default {
   },
   methods: {
     logout () {
-      var socket = io.connect('http://localhost:3000')
+      var socket = io.connect('https://quiet-sierra-10577.herokuapp.com/')
       socket.emit('logout', localStorage.name)
       localStorage.clear()
       this.$router.push('/')
     }
   },
   created () {
-    io.connect('http://localhost:3000').on('send-message', (data) => {
+    io.connect('https://quiet-sierra-10577.herokuapp.com/').on('send-message', (data) => {
       console.log('kumpulan chat message diterima')
       this.chatMessages = data
     })
@@ -51,19 +51,19 @@ export default {
     // })
   },
   mounted () {
-    io.connect('http://localhost:3000').on('player 1 win', (data) => {
+    io.connect('https://quiet-sierra-10577.herokuapp.com/').on('player 1 win', (data) => {
       this.winner = data[0].user + ' ' + data[0].choice + ', ' + data[1].user + ' ' + data[1].choice + ' => ' + data[0].user + ' wins!'
       this.$toasted.global.my_app_success({
         message: data[0].user + ' wins! '
       })
     })
-    io.connect('http://localhost:3000').on('player 2 win', (data) => {
+    io.connect('https://quiet-sierra-10577.herokuapp.com/').on('player 2 win', (data) => {
       this.winner = data[0].user + ' ' + data[0].choice + ', ' + data[1].user + ' ' + data[1].choice + ' => ' + data[1].user + ' wins!'
       this.$toasted.global.my_app_success({
         message: data[1].user + ' wins! '
       })
     })
-    io.connect('http://localhost:3000').on('tie', (data) => {
+    io.connect('https://quiet-sierra-10577.herokuapp.com/').on('tie', (data) => {
       this.winner = data[0].user + ' ' + data[0].choice + ', ' + data[1].user + ' ' + data[1].choice + ' => ' + ' Result is tie'
       this.$toasted.global.my_app_info({
         message: ' Result is tie'

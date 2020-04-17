@@ -45,7 +45,7 @@ export default {
   },
   methods: {
     setChoice () {
-      var socket = io.connect('http://localhost:3000')
+      var socket = io.connect('https://quiet-sierra-10577.herokuapp.com/')
       socket.emit('player choice', localStorage.name, this.choose)
     },
     playSound () {

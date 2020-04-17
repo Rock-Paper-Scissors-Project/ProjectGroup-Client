@@ -30,7 +30,7 @@ export default {
         name: localStorage.name,
         message: this.message
       }
-      var socket = io.connect('http://localhost:3000')
+      var socket = io.connect('https://quiet-sierra-10577.herokuapp.com/')
       socket.emit('send-message', messageData)
       this.message = ''
     }

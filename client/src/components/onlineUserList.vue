@@ -21,12 +21,12 @@ export default {
     }
   },
   created () {
-    // io.connect('http://localhost:3000').on('disconnected', (user) => {
+    // io.connect(https://quiet-sierra-10577.herokuapp.com/').on('disconnected', (user) => {
     //   console.log('user disconect dari server dan di store ke state', user)
     // })
   },
   mounted () {
-    io.connect('http://localhost:3000').on('get user', (data) => {
+    io.connect('https://quiet-sierra-10577.herokuapp.com/').on('get user', (data) => {
       this.$store.commit('SET_USER', data)
       // console.log('user dari server dan di store ke state', this.$store.state.users)
     })

@@ -23,13 +23,13 @@ export default {
       localStorage.clear()
       localStorage.setItem('name', user)
       console.log('user dikirim ke server', user)
-      const socket = io.connect('http://localhost:3000')
+      const socket = io.connect('https://quiet-sierra-10577.herokuapp.com/')
       socket.emit('add user', user)
       console.log(this.$store.state.users.length)
       if (this.$store.state.users.length < 2) {
         this.$router.push('/dashboard')
       } else {
-        const socket = io.connect('http://localhost:3000')
+        const socket = io.connect('https://quiet-sierra-10577.herokuapp.com/')
         socket.emit('logout', localStorage.name)
         localStorage.clear()
         this.$router.push('/')
