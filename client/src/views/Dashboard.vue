@@ -1,6 +1,9 @@
 <template>
   <div>
     <h1>Let's get it on!</h1>
+    <audio v-if="musicPlay" autoplay control loop >
+          <source src="../assets/background-sound.mp3" type="audio/ogg">
+    </audio>
     <div class="main-board">
         <div class="main-board-sidebar">
           <onlineUserList/>
@@ -28,9 +31,22 @@ export default {
     gameLog,
     chatBox
   },
+  data () {
+    return {
+      musicPlay: false
+    }
+  },
+  methods: {
+    playMusic () {
+      var music = new Audio(require('../assets/background-sound.mp3'))
+      music.play()
+    }
+  },
   created () {
     if (!localStorage.name) {
       this.$router.push('/')
+    } else {
+      this.musicPlay = true
     }
   }
 }

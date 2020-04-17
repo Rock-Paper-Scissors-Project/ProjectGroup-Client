@@ -55,6 +55,8 @@ export default {
 
 #nav {
   padding: 30px;
+  display: flex;
+  justify-content: center;
 }
 
 #nav a {

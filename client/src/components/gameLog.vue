@@ -101,6 +101,7 @@ export default {
 
 .game-log-chat-messages{
   height: 380px;
+  width: 100%;
   text-overflow: ellipsis;
   overflow: scroll;
   overflow-x: hidden;
