@@ -30,6 +30,8 @@ export default {
       this.$store.commit('SET_USER', data)
       // console.log('user dari server dan di store ke state', this.$store.state.users)
     })
+    console.log(this.$store.state.users)
+    this.listuser = this.$store.state.users
   }
 }
 </script>

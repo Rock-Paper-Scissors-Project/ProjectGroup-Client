@@ -50,6 +50,7 @@ export default {
  }
 
  .main-board-gameLog{
+  overflow: hidden;
   width: 60vw;
   display: flex;
   flex-direction: column;

@@ -7,21 +7,30 @@
     <div class="game-log-message-box">
       <p>{{winner}}</p>
       <p>{{msg}}</p>
-      <p>Player user_2 has joined the game
-      <p>Make your choice!</p>
+      <div id="separatorLine"></div>
+      <div style="  display:flex; flex-direction: column-reverse;">
+        <div class="game-log-chat-messages">
+          <div v-for="message in chatMessages" :key="message.name">
+            <p><b>{{message.name}}</b></p>
+            <p>{{message.message}}</p>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
 import io from 'socket.io-client'
+
 export default {
   name: 'gameLog',
   data () {
     return {
       choose: '',
       winner: '',
-      msg: ''
+      msg: '',
+      chatMessages: []
     }
   },
   methods: {
@@ -33,6 +42,10 @@ export default {
     }
   },
   created () {
+    io.connect('http://localhost:3000').on('send-message', (data) => {
+      console.log('kumpulan chat message diterima')
+      this.chatMessages = data
+    })
     // io.on('connected', function (username) {
     //   this.msg = 'User ' + username + '  has joined'
     // })
@@ -63,11 +76,11 @@ export default {
 <style>
 
 .game-log-message-box{
+  height: 80%;
   background-color: width;
   width: 80%;
   margin: 0 20% 0 0;
   text-align: left;
-
 }
 
 .game-log-box{
@@ -77,11 +90,27 @@ export default {
   border-color: #2ecc71;
   background-color:#ecf0f1;
   padding: 5px 20px;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .game-log-box-header{
   display:flex;
   justify-content: space-between;
+}
+
+.game-log-chat-messages{
+  height: 380px;
+  text-overflow: ellipsis;
+  overflow: scroll;
+  overflow-x: hidden;
+}
+
+#separatorLine{
+  background-color: #2ecc71;
+  width: 100%;
+  height:2px;
+  border-radius: 1px;
 }
 
 </style>
