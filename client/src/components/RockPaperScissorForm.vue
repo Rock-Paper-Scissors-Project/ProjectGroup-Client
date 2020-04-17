@@ -5,7 +5,7 @@
         <form>
             <div class="hand-selection-form">
                     <div id="hand-selection-paper">
-                       <input type="radio" v-model="choose" name="hand-selection" class="input-hidden" id="paper" value="paper">
+                       <input type="radio" @click="playSound" v-model="choose" name="hand-selection" class="input-hidden" id="paper" value="paper">
                         <label for="paper">
                             <!-- <h2>PAPER</h2> -->
                             <img src="@/assets/images/rps-1-paper.png" alt="hand-paper">
@@ -13,7 +13,7 @@
                     </div>
 
                     <div id="hand-selection-scissor">
-                        <input type="radio" v-model="choose" name="hand-selection" class="input-hidden" id="scissor" value="scissor">
+                        <input type="radio" @click="playSound" v-model="choose" name="hand-selection" class="input-hidden" id="scissor" value="scissor">
                     <label for="scissor">
                         <!-- <h2>SCISSOR</h2> -->
                         <img src="@/assets/images/rps-3-scissor.png" alt="hand-scissor">
@@ -21,7 +21,7 @@
                     </div>
 
                     <div id="hand-selection-rock">
-                        <input type="radio" v-model="choose" name="hand-selection" class="input-hidden" id="rock" value="rock">
+                        <input type="radio" @click="playSound" v-model="choose" name="hand-selection" class="input-hidden" id="rock" value="rock">
                         <label for="rock">
                             <!-- <h2>ROCK</h2> -->
                             <img src="@/assets/images/rps-2-rock.png" alt="hand-rock">
@@ -47,6 +47,11 @@ export default {
     setChoice () {
       var socket = io.connect('http://localhost:3000')
       socket.emit('player choice', localStorage.name, this.choose)
+    },
+    playSound () {
+      // var music = new Audio('http://soundbible.com/mp3/Button-SoundBible.com-1420500901.mp3')
+      var music = new Audio(require('../assets/click-button-sound.mp3'))
+      music.play()
     }
   }
 }
